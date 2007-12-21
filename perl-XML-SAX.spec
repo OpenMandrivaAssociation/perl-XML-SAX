@@ -20,6 +20,7 @@ Provides:	perl(XML::SAX::PurePerl::DocType)
 Provides:	perl(XML::SAX::PurePerl::EncodingDetect)
 Provides:	perl(XML::SAX::PurePerl::XMLDecl)
 BuildArch:	noarch
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 XML::SAX consists of several framework classes for using and building
