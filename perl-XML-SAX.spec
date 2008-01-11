@@ -1,7 +1,7 @@
 %define module	XML-SAX
 %define name	perl-%{module}
 %define version 0.16
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -21,6 +21,10 @@ Provides:	perl(XML::SAX::PurePerl::EncodingDetect)
 Provides:	perl(XML::SAX::PurePerl::XMLDecl)
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}
+# skipping requires on perl modules not in perl-base but in perl pkg
+# those requires are only used by PurePerl module, whereas we often use perl-XML-LibXML
+# this is useful to ensure urpmi only need perl-base, not perl
+%define _requires_exceptions perl(File::Temp)\\|perl(Encode)
 
 %description
 XML::SAX consists of several framework classes for using and building
