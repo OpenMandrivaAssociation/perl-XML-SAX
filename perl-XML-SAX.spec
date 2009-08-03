@@ -1,16 +1,21 @@
-%define module	XML-SAX
-%define name	perl-%{module}
-%define version 0.96
-%define release %mkrel 2
+%define upstream_name	 XML-SAX
+%define upstream_version 0.96
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+# skipping requires on perl modules not in perl-base but in perl pkg
+# those requires are only used by PurePerl module, whereas we often use perl-XML-LibXML
+# this is useful to ensure urpmi only need perl-base, not perl
+%define _requires_exceptions perl(File::Temp)\\|perl(Encode)
+
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:	Simple API for XML
-License:	GPL or Artistic
+License:	GPL+ or Artistic
 Group:		Development/Perl
-Source:		ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{module}-%{version}.tar.bz2
-Url:		http://search.cpan.org/dist/%{module}
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{upstream_name}-%{upstream_version}.tar.bz2
+
 %if %{mdkversion} < 1010
 Buildrequires:	perl-devel
 %endif
@@ -20,11 +25,7 @@ Provides:	perl(XML::SAX::PurePerl::DocType)
 Provides:	perl(XML::SAX::PurePerl::EncodingDetect)
 Provides:	perl(XML::SAX::PurePerl::XMLDecl)
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
-# skipping requires on perl modules not in perl-base but in perl pkg
-# those requires are only used by PurePerl module, whereas we often use perl-XML-LibXML
-# this is useful to ensure urpmi only need perl-base, not perl
-%define _requires_exceptions perl(File::Temp)\\|perl(Encode)
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 XML::SAX consists of several framework classes for using and building
@@ -35,7 +36,7 @@ the DBI will be right at home. Some of the designs come from the Java
 JAXP specification (SAX part), only without the javaness.
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 chmod 644 Changes LICENSE README
 
 %build
@@ -72,5 +73,3 @@ fi
 %{_mandir}/man3/XML::*.3*
 %ghost %{perl_vendorlib}/XML/SAX/ParserDetails.ini
 %exclude %{perl_vendorlib}/XML/SAX/placeholder.pl
-
-
