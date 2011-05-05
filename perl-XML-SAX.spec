@@ -53,6 +53,8 @@ rm -rf %{buildroot}
 %makeinstall_std PERL="perl -I%{buildroot}%{perl_vendorlib}/"
 touch %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
 
+rm -f %{buildroot}%{perl_vendorlib}/XML/SAX/placeholder.pl
+
 %clean 
 rm -rf %{buildroot}
 
@@ -72,4 +74,3 @@ fi
 %{perl_vendorlib}/XML
 %{_mandir}/man3/XML::*.3*
 %ghost %{perl_vendorlib}/XML/SAX/ParserDetails.ini
-%exclude %{perl_vendorlib}/XML/SAX/placeholder.pl
