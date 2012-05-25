@@ -16,9 +16,7 @@ Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{upstream_name}
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{upstream_name}-%{upstream_version}.tar.bz2
 
-%if %{mdkversion} < 1010
 Buildrequires:	perl-devel
-%endif
 BuildRequires:	perl(XML::NamespaceSupport)
 Provides:	perl(XML::SAX::PurePerl::DTDDecls)
 Provides:	perl(XML::SAX::PurePerl::DocType)
