@@ -1,5 +1,5 @@
 %define upstream_name	 XML-SAX
-%define upstream_version 0.96
+%define upstream_version 0.99
 
 # skipping requires on perl modules not in perl-base but in perl pkg
 # those requires are only used by PurePerl module, whereas we often use perl-XML-LibXML
@@ -8,7 +8,7 @@
 
 Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 5
+Release:    1
 
 Summary:	Simple API for XML
 License:	GPL+ or Artistic
@@ -73,4 +73,3 @@ fi
 %doc Changes LICENSE README
 %{perl_vendorlib}/XML
 %{_mandir}/man3/XML::*.3*
-%ghost %{perl_vendorlib}/XML/SAX/ParserDetails.ini
