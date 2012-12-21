@@ -12,16 +12,19 @@
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	2
+Release:	3
 
 Summary:	Simple API for XML
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{upstream_name}
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{upstream_name}-%{upstream_version}.tar.bz2
-
+Source1:	ParserDetails.ini
 BuildRequires:	perl-devel
 BuildRequires:	perl(XML::NamespaceSupport)
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(File::Temp)
+BuildRequires:	perl(XML::SAX::Base) >= 1.50.0
 Provides:	perl(XML::SAX::PurePerl::DTDDecls)
 Provides:	perl(XML::SAX::PurePerl::DocType)
 Provides:	perl(XML::SAX::PurePerl::EncodingDetect)
@@ -51,19 +54,8 @@ make test
 
 %install
 %makeinstall_std PERL="perl -I%{buildroot}%{perl_vendorlib}/"
-touch %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
+install -m 0644 %{SOURCE1} %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
 
-rm -f %{buildroot}%{perl_vendorlib}/XML/SAX/placeholder.pl
-
-%post
-perl -MXML::SAX -e \
-  'XML::SAX->add_parser(q(XML::SAX::PurePerl))->save_parsers()' 2>/dev/null
-
-%preun
-if [ $1 -eq 0 ]; then
-  perl -MXML::SAX -e \
-    'XML::SAX->remove_parser(q(XML::SAX::PurePerl))->save_parsers()'
-fi
 
 %files
 %doc Changes LICENSE README
