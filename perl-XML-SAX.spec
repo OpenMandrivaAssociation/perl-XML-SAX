@@ -25,6 +25,7 @@ BuildRequires:	perl(XML::NamespaceSupport)
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	perl(File::Temp)
 BuildRequires:	perl(XML::SAX::Base) >= 1.50.0
+BuildRequires:	perl(JSON::PP)
 Provides:	perl(XML::SAX::PurePerl::DTDDecls)
 Provides:	perl(XML::SAX::PurePerl::DocType)
 Provides:	perl(XML::SAX::PurePerl::EncodingDetect)
@@ -62,8 +63,10 @@ install -m644 %{SOURCE1} -D %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.
 
 %changelog
 * Sat Dec 29 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.990.0-4
+- add perl(JSON::PP) to buildrequires
 - rebuild for new perl-5.16.2
-- cleanupss
+- cleanups
+
 * Fri May 25 2012 Crispin Boylan <crisb@mandriva.org> 0.990.0-1
 + Revision: 800715
 - New release
