@@ -1,5 +1,5 @@
-%define upstream_name	 XML-SAX
-%define upstream_version 0.99
+%define	modname	XML-SAX
+%define	modver	0.99
 
 # skipping requires on perl modules not in perl-base but in perl pkg
 # those requires are only used by PurePerl module, whereas we often use perl-XML-LibXML
@@ -10,15 +10,15 @@
 %define _requires_exceptions perl(File::Temp)\\|perl(Encode)
 %endif
 
-Name:		perl-%{upstream_name}
-Version:	%perl_convert_version %{upstream_version}
-Release:	3
+Name:		perl-%{modname}
+Version:	%{perl_convert_version %{modver}}
+Release:	4
 
 Summary:	Simple API for XML
 License:	GPL+ or Artistic
 Group:		Development/Perl
-Url:		http://search.cpan.org/dist/%{upstream_name}
-Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{upstream_name}-%{upstream_version}.tar.bz2
+Url:		http://search.cpan.org/dist/%{modname}
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{modname}-%{modver}.tar.bz2
 Source1:	ParserDetails.ini
 BuildRequires:	perl-devel
 BuildRequires:	perl(XML::NamespaceSupport)
@@ -40,11 +40,10 @@ the DBI will be right at home. Some of the designs come from the Java
 JAXP specification (SAX part), only without the javaness.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
-chmod 644 Changes LICENSE README
+%setup -q -n %{modname}-%{modver}
 
 %build
-%__perl Makefile.PL INSTALLDIRS=vendor <<EOF
+perl Makefile.PL INSTALLDIRS=vendor <<EOF
 N
 EOF
 %make
@@ -53,9 +52,8 @@ EOF
 make test
 
 %install
-%makeinstall_std PERL="perl -I%{buildroot}%{perl_vendorlib}/"
-install -m 0644 %{SOURCE1} %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
-
+%makeinstall_std
+install -m644 %{SOURCE1} -D %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
 
 %files
 %doc Changes LICENSE README
@@ -63,6 +61,9 @@ install -m 0644 %{SOURCE1} %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.i
 %{_mandir}/man3/XML::*.3*
 
 %changelog
+* Sat Dec 29 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.990.0-4
+- rebuild for new perl-5.16.2
+- cleanupss
 * Fri May 25 2012 Crispin Boylan <crisb@mandriva.org> 0.990.0-1
 + Revision: 800715
 - New release
