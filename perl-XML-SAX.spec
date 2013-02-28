@@ -12,7 +12,7 @@
 
 Name:		perl-%{modname}
 Version:	%{perl_convert_version %{modver}}
-Release:	4
+Release:	5
 
 Summary:	Simple API for XML
 License:	GPL+ or Artistic
@@ -53,6 +53,8 @@ EOF
 make test
 
 %install
+# make install uses XML::SAX -- look in %buildroot before anything else
+export PERL5LIB=%buildroot%perl_vendorlib:%perl_vendorlib
 %makeinstall_std
 install -m644 %{SOURCE1} -D %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
 
