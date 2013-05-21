@@ -12,7 +12,7 @@
 
 Name:		perl-%{modname}
 Version:	%{perl_convert_version %{modver}}
-Release:	5
+Release:	6
 
 Summary:	Simple API for XML
 License:	GPL+ or Artistic
