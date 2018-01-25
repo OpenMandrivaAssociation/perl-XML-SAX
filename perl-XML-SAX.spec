@@ -13,7 +13,7 @@
 Summary:	Simple API for XML
 Name:		perl-%{modname}
 Version:	%{perl_convert_version %{modver}}
-Release:	19
+Release:	20
 License:	GPLv2+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{modname}
@@ -61,4 +61,3 @@ install -m644 %{SOURCE1} -D %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.
 %doc Changes LICENSE README
 %{perl_vendorlib}/XML
 %{_mandir}/man3/XML::*.3*
-
