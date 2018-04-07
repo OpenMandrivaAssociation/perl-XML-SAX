@@ -1,19 +1,15 @@
-%define	modname	XML-SAX
-%define	modver	0.99
+%define modname XML-SAX
+%define modver 1.00
 
 # skipping requires on perl modules not in perl-base but in perl pkg
 # those requires are only used by PurePerl module, whereas we often use perl-XML-LibXML
 # this is useful to ensure urpmi only need perl-base, not perl
-%if %{_use_internal_dependency_generator}
-%define __noautoreq 'perl\\(File::Temp\\)|perl\\(Encode\\)'
-%else
-%define _requires_exceptions perl(File::Temp)\\|perl(Encode)
-%endif
+%global __requires_exclude perl\\(File::Temp\\)|perl\\(Encode\\)
 
 Summary:	Simple API for XML
 Name:		perl-%{modname}
 Version:	%{perl_convert_version %{modver}}
-Release:	20
+Release:	1
 License:	GPLv2+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{modname}
@@ -52,9 +48,7 @@ EOF
 make test
 
 %install
-# make install uses XML::SAX -- look in %{buildroot} before anything else
-export PERL5LIB=%{buildroot}%{perl_vendorlib}:%{perl_vendorlib}
-%makeinstall_std
+%makeinstall_std PERL="perl -I%{buildroot}%{perl_vendorlib}/"
 install -m644 %{SOURCE1} -D %{buildroot}%{perl_vendorlib}/XML/SAX/ParserDetails.ini
 
 %files
