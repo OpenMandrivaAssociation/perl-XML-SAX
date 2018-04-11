@@ -9,7 +9,7 @@
 Summary:	Simple API for XML
 Name:		perl-%{modname}
 Version:	%{perl_convert_version %{modver}}
-Release:	1
+Release:	2
 License:	GPLv2+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{modname}
@@ -17,6 +17,7 @@ Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{modname}-%{modver}.
 Source1:	ParserDetails.ini
 BuildArch:	noarch
 BuildRequires:	perl-devel
+BuildRequires:	perl-Test
 BuildRequires:	perl(XML::NamespaceSupport)
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	perl(File::Temp)
