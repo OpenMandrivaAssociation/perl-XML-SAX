@@ -16,6 +16,7 @@ Url:		https://search.cpan.org/dist/%{modname}
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/XML/%{modname}-%{modver}.tar.gz
 Source1:	ParserDetails.ini
 BuildArch:	noarch
+BuildRequires:	make
 BuildRequires:	perl-devel
 BuildRequires:	perl-Test
 BuildRequires:	perl(XML::NamespaceSupport)
